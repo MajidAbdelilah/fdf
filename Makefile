@@ -10,7 +10,7 @@ CC = cc
 AR = ar
 C_FLAGS = -Wall -Wextra -Werror# -O3 -g -fsanitize=address
 LD_FLAGS := -L./libft -lft
-NAME = libftprintf.a
+NAME = fdf
 #.PHONY: all clean fclean re
 
 all: $(NAME)
