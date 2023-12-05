@@ -6,13 +6,13 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:38:53 by amajid            #+#    #+#             */
-/*   Updated: 2023/11/09 18:49:41 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/05 19:52:40 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include <stdlib.h>
 
+#include <stdlib.h>
+#include "ft_printf.h"
 static char	*work(char *re_holder, int i)
 {
 	int		index;

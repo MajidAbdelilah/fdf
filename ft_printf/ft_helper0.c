@@ -6,11 +6,11 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:41:03 by amajid            #+#    #+#             */
-/*   Updated: 2023/11/13 15:12:47 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/05 19:51:55 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+
 #include "ft_printf.h"
 
 static long	str(va_list list)

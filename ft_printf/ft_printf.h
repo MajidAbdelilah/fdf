@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:44:21 by amajid            #+#    #+#             */
-/*   Updated: 2023/11/11 20:31:37 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/05 19:46:29 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 int		ft_printf(const char *str, ...);
 void	c_hand(char c, int fd);

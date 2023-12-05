@@ -6,21 +6,25 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:22:49 by amajid            #+#    #+#             */
-/*   Updated: 2023/11/06 15:47:06 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/05 19:51:07 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <unistd.h>
 
-void	ft_putendl_fd(char *s, int fd)
+int	ft_putendl_fd(char *s, int fd)
 {
 	size_t	size;
-
+	int		ret;
+	
+	ret = 0;
 	if (!s)
-		return ;
+		return 0;
 	size = ft_strlen(s);
-	write(fd, s, size);
+	ret += write(fd, s, size);
 	write(fd, "\n", 1);
-	return ;
+	if(ret == -1)
+		return ret;
+	return ret + 1;
 }

@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:29:54 by amajid            #+#    #+#             */
-/*   Updated: 2023/11/06 15:46:45 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/05 19:49:06 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,10 @@ static void	ft_itoa_ptr(int n, char *result)
 	(work(re_holder, i, result));
 }
 
-void	ft_putnbr_fd(int n, int fd)
+int	ft_putnbr_fd(int n, int fd)
 {
 	char	result[32];
 
 	ft_itoa_ptr(n, result);
-	write(fd, result, ft_strlen(result));
-	return ;
+	return write(fd, result, ft_strlen(result));
 }

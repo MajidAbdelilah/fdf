@@ -6,11 +6,11 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:01:39 by amajid            #+#    #+#             */
-/*   Updated: 2023/11/10 16:12:26 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/05 19:52:00 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+
 #include "ft_printf.h"
 #include <stdlib.h>
 
