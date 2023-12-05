@@ -4,8 +4,11 @@
 
 typedef struct 
 {
+	// RIGHT
 	float	x;
+	// FORWARD
 	float	y;
+	// UP
 	float	z;
 }	t_point;
 
