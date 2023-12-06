@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:54:55 by amajid            #+#    #+#             */
-/*   Updated: 2023/11/18 15:33:54 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/06 17:29:30 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct vars{
 	long	size;
 }	t_vars;
 
-char	*get_next_line(int fd);
 void	*ft_memcpy(void *dest, const void *src, long n);
 long	ft_strlen(const char *s);
 long	ft_strlcpy(char *dst, const char *src, long dstsize);
