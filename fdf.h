@@ -18,4 +18,4 @@ typedef struct
 	t_point v[4];
 } t_quad;
 
-t_point	*get_split_fdf(int fd, int *size);
+t_point	*get_split_fdf(int fd, unsigned int *size);

@@ -28,12 +28,11 @@ void adjust_result_size(t_point *result, unsigned int *size){
 	(*size) *= mul;
 }
 
-t_point	*get_split_fdf(int fd, int *size)
+t_point	*get_split_fdf(int fd, unsigned int *size)
 {
 	unsigned int	r_size;
 	unsigned int	i;
 	unsigned int	j;
-	unsigned int	atoi_ret;
 	unsigned int	index;
 	t_point *result;
 	

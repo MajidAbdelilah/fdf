@@ -1,4 +1,4 @@
-SRCS =	 main.c
+SRCS =	 main.c parse_file.c
 OBJS = $(SRCS:.c=.o)
 BONUS_SRCS = 
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
@@ -11,14 +11,15 @@ AR = ar
 C_FLAGS = -Wall -Wextra -Werror# -O3 -g -fsanitize=address
 LD_FLAGS := -L./libft -lft
 NAME = fdf
-#.PHONY: all clean fclean re
+LD_FLAGS_OBJ = 
+.PHONY: clean
 
 all: $(NAME)
 
 
 clean:
 	cd libft && make fclean
-	rm -rf $(OBJS)  $(BONUS_OBJS) $(GNL_OBJS) $(PRINTF_OBJS) 
+	rm -rf $(OBJS)  $(BONUS_OBJS) $(GNL_OBJS) $(PRINTF_OBJS) debug
 
 fclean: clean
 	rm -rf $(NAME)
@@ -27,13 +28,16 @@ re: fclean all
 
 
 %.o: %.c
-	$(CC) $(C_FLAGS) -c -o $@ $<
+	$(CC) $(C_FLAGS) -c -o $@ $< $(LD_FLAGS_OBJ)
 
 $(NAME):  libft/libft.a $(OBJS) $(GNL_OBJS) $(PRINTF_OBJS)
-	$(CC) $(C_FLAGS) -o  $@ $(OBJS) $(GNL_OBJS) $(PRINTF_OBJS) -L./libft/ -lft 
+	$(CC) $(C_FLAGS) -o  $@ $(OBJS) $(GNL_OBJS) $(PRINTF_OBJS) $(LD_FLAGS)
 
 libft/libft.a:
 	cd libft && make fclean all
 
+debug: C_FLAGS+= -g
+debug: LD_FLAGS+= -fsanitize=address
+debug: LD_FLAGS_OBJ+= -fsanitize=address
 debug:  libft/libft.a $(OBJS) $(GNL_OBJS) $(PRINTF_OBJS)
-	$(CC) $(C_FLAGS) -g -o $@ $(OBJS) $(GNL_OBJS) $(PRINTF_OBJS) -fsanitize=address
+	$(CC) $(C_FLAGS) -o $@ $(OBJS) $(GNL_OBJS) $(PRINTF_OBJS) $(LD_FLAGS)
