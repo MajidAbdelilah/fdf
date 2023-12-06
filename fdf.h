@@ -1,6 +1,7 @@
 #pragma once
 
 #define Z_DIVE 8
+#define XYZ_MUL 16
 
 typedef struct 
 {
@@ -16,3 +17,5 @@ typedef struct
 {
 	t_point v[4];
 } t_quad;
+
+t_point	*get_split_fdf(int fd, int *size);
