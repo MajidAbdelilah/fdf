@@ -16,12 +16,15 @@ t_matrix4f perspective(float left,float right,float bottom,float top,float near,
 	return matrix;
 }
 
+
 t_point point_matrix_multiply (t_matrix4f m, t_point v)
 {
 	t_point result;
 
-(x*a + y*b + z*c + w*d;
- x*e + y*f + z*g + w*h;
- x*i + y*j + z*k + w*l;
- x*m + y*n + z*o + w*p)
+	result = (t_point){v.x*m.m[0][0] + v.y*m.m[1][0] + v.z*m.m[2][0] + v.w*m.m[3][0],
+ 					v.x*m.m[0][1] + v.y*m.m[1][1] + v.z*m.m[2][1] + v.w*m.m[3][1],
+					v.x*m.m[0][2] + v.y*m.m[1][2] + v.z*m.m[2][2] + v.w*m.m[3][2],
+					v.x*m.m[0][3] + v.y*m.m[1][3] + v.z*m.m[2][3] + v.w*m.m[3][3]};
+ 
+ return result;
 }
