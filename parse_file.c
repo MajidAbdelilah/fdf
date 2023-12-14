@@ -9,8 +9,9 @@ t_point	get_point(int x, int y, int z)
 	t_point result;
 
 	result.x = x * XYZ_MUL;
-	result.y = y * XYZ_MUL;
-	result.z = ((float)z * XYZ_MUL) / Z_DIVE;
+	result.z = y * XYZ_MUL;
+	result.y = - ((float)z * XYZ_MUL);
+	result.w = 1.0f;
 	return result;
 }
 
