@@ -48,13 +48,14 @@ typedef struct
 	t_point v[4];
 } t_quad;
 
-t_point	*get_split_fdf(int fd, unsigned int *size);
+t_point	*get_split_fdf(int fd, unsigned int *size, unsigned int *size_i, unsigned int *size_j);
 t_matrix4f perspective(float left,float right,float bottom,float top,float near,float far);
 t_matrix4f orthogonal(float left,float right,float bottom,float top,float near,float far);
 t_point point_matrix_multiply (t_matrix4f m, t_point v);
 t_point get_normalized_ray(t_point p1, t_point p2);
 void DDA(float X0, float Y0, float X1, float Y1, t_data *data, int color);
-
+int get_max(int x, int y);
+int get_min(int x, int y);
 t_matrix4f matrix4x4_set_scale(t_point vecScale);
 t_matrix4f matrix4x4_set_rotation(float flAngle, t_point v);
 t_matrix4f matrix4x4_set_translation(t_point vecPos);

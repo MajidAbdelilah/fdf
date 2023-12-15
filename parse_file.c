@@ -15,21 +15,45 @@ t_point	get_point(int x, int y, int z)
 	return result;
 }
 
-void adjust_result_size(t_point *result, unsigned int *size){
+void adjust_result_size(t_point **result, unsigned int *size){
 	t_point	*tmp;
 	int		mul;
 
 	mul = 3;
 	tmp = malloc(sizeof(t_point) * (*size));
-	ft_memcpy(tmp, result, sizeof(t_point) * (*size));
-	free(result);
-	result = malloc(sizeof(t_point) * ((*size) * mul));
-	ft_memcpy(result, tmp, sizeof(t_point) * (*size));
+	ft_memcpy(tmp, *result, sizeof(t_point) * (*size));
+	free(*result);
+	*result = malloc(sizeof(t_point) * ((*size) * mul));
+	ft_memcpy(*result, tmp, sizeof(t_point) * (*size));
 	free(tmp);
 	(*size) *= mul;
 }
 
-t_point	*get_split_fdf(int fd, unsigned int *size)
+
+void fix_positions(t_point *data, unsigned int size, unsigned int i_i, unsigned int j_j)
+{
+	int max = 0;
+	int min = 0;
+	int avg = 0;
+	unsigned int i = 0;
+	while(i < size)
+	{
+		max = get_max(max, data[i].y);
+		min = get_min(min, data[i].y);
+		i++;
+	}
+	i = 0;
+	avg = max + min;
+	while(i < size)
+	{
+		data[i].y -= (float)avg / 2;
+		data[i].x -= (float)i_i / 2;
+		data[i].z -= (float)j_j / 2;
+		i++;
+	}
+}
+
+t_point	*get_split_fdf(int fd, unsigned int *size, unsigned int *size_i, unsigned int *size_j)
 {
 	unsigned int	r_size;
 	unsigned int	i;
@@ -53,12 +77,15 @@ t_point	*get_split_fdf(int fd, unsigned int *size)
 		while(splited_line[i])
 		{
 			if(index >= (r_size - 1))
-				adjust_result_size(result, &r_size);
+				adjust_result_size(&result, &r_size);
 			result[index++] = get_point(i, j, ft_atoi(splited_line[i]));
 			i++;
 		}
 		j++;
 	}
+	fix_positions(result, index, i, j);
+	*size_i = i;
+	*size_j = j;
 	(*size) = index;
 	return result;
 }

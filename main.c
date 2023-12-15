@@ -1,5 +1,6 @@
 #include "fdf.h"
 #include <fcntl.h>
+#include <stdlib.h>
 #include <sys/fcntl.h>
 #include "ft_printf/ft_printf.h"
 #include <stdio.h>
@@ -8,11 +9,14 @@
 
 
 
-int main()
+int main(int argnum, char **args)
 {
-	int map = open("../test_maps/42.fdf", O_RDONLY);
+	(void)(argnum);
+	int map = open(args[1], O_RDONLY);
 	unsigned int size = 0;
-	t_point *result = get_split_fdf(map, &size);
+	unsigned int j_j = 0;
+	unsigned int i_i = 0;
+	t_point *result = get_split_fdf(map, &size, &i_i, &j_j);
 	unsigned int i = 0;
 	while(i < (size))
 	{
@@ -50,10 +54,10 @@ int main()
 	//  rotation = matrix4x4_set_rotation( 0, (t_point){0.0f,0.0f,1.0f, 0.0f});
 	
 	
-	rotation = Matrix4x4_mul(matrix4x4_set_rotation(45, (t_point){0.0f,1.0f,0.0f, 0.0f}), rotation);
+	rotation = Matrix4x4_mul(matrix4x4_set_rotation(-45, (t_point){0.0f,1.0f,0.0f, 0.0f}), rotation);
 	rotation = Matrix4x4_mul(matrix4x4_set_rotation(-35, (t_point){1.0f,0.0f,0.0f, 0.0f}), rotation);
 
-	model = Matrix4x4_mul(matrix4x4_set_translation((t_point){700.0f, 350.0f, -100.0f, 0}), Matrix4x4_mul(rotation, matrix4x4_set_scale((t_point){0.19f, 0.19f, 0.19f, 0.1f})));
+	model = Matrix4x4_mul(matrix4x4_set_translation((t_point){600.0f, 150.0f, -0.0f, 0}), Matrix4x4_mul(rotation, matrix4x4_set_scale((t_point){0.05f, 0.05f, 0.05f, 1.0f})));
 //	t_matrix4f iso = get_isometric_matrix();
 	unsigned int j = 0;
 	unsigned int last_line_index = 0;
@@ -63,6 +67,8 @@ int main()
 		t_point p = result[i];
 		p = point_matrix_multiply(model, p);
 		p = point_matrix_multiply(pers, p);
+	
+		
 		t_point p2;
 		// p2.x = (p2.x / p2.w) / 2;
 		// p2.y = (p2.y / p2.w) / 2;
@@ -71,7 +77,7 @@ int main()
 		// p.y *= ((float)1080/2);
 			
 		
-		if(result[i].x == 0.0f)
+		if((i % i_i) == 0)
 		{
 			i_size = last_line_index;
 			last_line_index = i;
@@ -82,16 +88,7 @@ int main()
 			p2 = result[i-1];
 			p2 = point_matrix_multiply(model, p2);
 			p2 = point_matrix_multiply(pers, p2);
-			// p2.x = (p2.x / p2.w) / 2;
-			// p2.y = (p2.y / p2.w) / 2;
 			 printf("kh 1= %u(x = %f, y = %f, z = %f, w = %f)\n", i, p2.x, p2.y, p2.z, p2.w);
-			// p2.x *= ((float)1920/2);
-			// p2.y *= ((float)1080/2);
-			// // if(p2.x > 1920 || p2.x < 0 || p.y > 1080 || p.y < 0)
-			// {
-			// 	i++;
-			// 	continue;
-			// }
 			if(result[i].y < 0.0f || result[i-1].y < 0.0f)
 				DDA(p.x, p.y, p2.x, p2.y, &img, 0x00990000);
 			else
@@ -101,21 +98,11 @@ int main()
 		}
 		if(up)
 		{
-			p2 = result[i_size + j];
+			p2 = result[i - i_i];
 			p2 = point_matrix_multiply(model, p2);
 			p2 = point_matrix_multiply(pers, p2);
-			// p2.x = (p2.x / p2.w) / 2;
-			// p2.y = (p2.y / p2.w) / 2;
 			 printf("kh 2= %u(x = %f, y = %f, z = %f, w = %f)\n", i, p2.x, p2.y, p2.z, p2.w);
-			// p2.x *= (float)1920/2;
-			// p2.y *= (float)1080/2;
-		
-			// if(p2.x > 1920 || p2.x < 0 || p.y > 1080 || p.y < 0)
-			// {
-			// 	i++;
-			// 	continue;
-			// }
-			if(result[i].y < 0.0f || result[i_size + j].y < 0.0f)
+			if(result[i].y < 0.0f || result[i - i_i].y < 0.0f)
 				DDA(p.x, p.y, p2.x, p2.y, &img, 0x00990000);
 			else
 				DDA(p.x, p.y, p2.x, p2.y, &img, 0x00009900);

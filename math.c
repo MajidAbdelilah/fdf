@@ -111,7 +111,16 @@ t_matrix4f Matrix4x4_mul(t_matrix4f left, t_matrix4f right)
 }
 
 float my_abs(float n) { return ((n > 0.0f) ? n : (n * (-1.0f))); } 
-
+int get_max(int x, int y)
+{
+	char is_x = (x > y);
+	return (x * is_x + y * !is_x);
+}
+int get_min(int x, int y)
+{
+	char is_x = (x < y);
+	return (x * is_x + y * !is_x);
+}
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
