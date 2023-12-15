@@ -1,7 +1,7 @@
 #pragma once
 
 #define Z_DIVE 8
-#define XYZ_MUL 16
+#define XYZ_MUL 4
 
 typedef struct 
 {

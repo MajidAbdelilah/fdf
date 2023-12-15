@@ -28,7 +28,7 @@ fclean: clean
 re: fclean all
 
 
-%.o: %.c
+%.o: %.c fdf.h
 	$(CC) $(C_FLAGS) -c -o $@ $< $(LD_FLAGS_OBJ)
 
 $(NAME):  libft/libft.a mlx/libmlx.a $(OBJS) $(GNL_OBJS) $(PRINTF_OBJS)

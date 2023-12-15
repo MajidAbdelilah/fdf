@@ -61,10 +61,14 @@ int main(int argnum, char **args)
 	unsigned int j = 0;
 	unsigned int last_line_index = 0;
 
-	int x_max = 0;
-	int x_min = 0;
-	int y_max = 0;
-	int y_min = 0;
+
+	t_point p = result[0];
+	p = point_matrix_multiply(rotation, p);
+	p = point_matrix_multiply(pers, p);
+	int x_max = p.x;
+	int x_min = p.x;
+	int y_max = p.y;
+	int y_min = p.y;
 	i = 0;
 	while(i < size)
 	{
@@ -78,13 +82,13 @@ int main(int argnum, char **args)
 		i++;
 	}
 
-	float scale_x = (float)(1920 - 300) / (abs(x_max) + abs(x_min));
-	float scale_y = (float)(1080 - 300) / (abs(y_max) + abs(y_min));
+	float scale_x = (float)(1920 - 400) / (abs(x_max) + abs(x_min));
+	float scale_y = (float)(1080 - 400) / (abs(y_max) + abs(y_min));
 	float scale = (scale_x < scale_y) * scale_x + !(scale_x < scale_y) * scale_y;
 	printf("(x_max + x_min) * scale_x = %d\n", (abs(x_max) + abs(x_min)));
-	printf("(y_max + y_min) * scale_y = %d\n", (abs(y_max) + abs(y_min)));
+	printf("(y_max + y_min) * scale_y = %f\n", scale);
 	
-	model = Matrix4x4_mul(matrix4x4_set_translation((t_point){ (float)(1920 - ((float)(abs(x_max) + abs(x_min)) / 2) * scale) / 2 + 70, (float)(1080 - ((float)(abs(y_max) + abs(y_min)) / 2) * scale) / 2 - 70, 900.0f, 0}), Matrix4x4_mul(rotation, matrix4x4_set_scale((t_point){scale, scale, scale, 1.0f})));
+	model = Matrix4x4_mul(matrix4x4_set_translation((t_point){ abs(x_min) * scale + 30, (abs(y_min) * scale) + 30, 0.0f, 0}), Matrix4x4_mul(rotation, matrix4x4_set_scale((t_point){scale, scale, scale, 1.0f})));
 	i = 1;
 	while(i < (size))
 	{
@@ -114,6 +118,11 @@ int main(int argnum, char **args)
 			p2 = point_matrix_multiply(model, p2);
 			p2 = point_matrix_multiply(pers, p2);
 			 printf("kh 1= %u(x = %f, y = %f, z = %f, w = %f)\n", i, p2.x, p2.y, p2.z, p2.w);
+			if(p2.x > 1920 || p2.x < 0 || p2.y > 1080 || p2.y < 0 || p.x > 1920 || p.x < 0 || p.y > 1080 || p.y < 0)
+				{
+					i++;
+					continue;
+				}
 			if(result[i].y < 0.0f || result[i-1].y < 0.0f)
 				DDA(p.x, p.y, p2.x, p2.y, &img, 0x00990000);
 			else
@@ -127,6 +136,11 @@ int main(int argnum, char **args)
 			p2 = point_matrix_multiply(model, p2);
 			p2 = point_matrix_multiply(pers, p2);
 			 printf("kh 2= %u(x = %f, y = %f, z = %f, w = %f)\n", i, p2.x, p2.y, p2.z, p2.w);
+			if(p2.x > 1920 || p2.x < 0 || p2.y > 1080 || p2.y < 0 || p.x > 1920 || p.x < 0 || p.y > 1080 || p.y < 0)
+				{
+					i++;
+					continue;
+				}
 			if(result[i].y < 0.0f || result[i - i_i].y < 0.0f)
 				DDA(p.x, p.y, p2.x, p2.y, &img, 0x00990000);
 			else
