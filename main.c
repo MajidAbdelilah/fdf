@@ -36,7 +36,7 @@ int main(int argnum, char **args)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								&img.endian);
 	//my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
-	i = 1;
+	// i = 1;
 	float aspectRatio = (float)1920/1080;
 
  // generate perspective matrix  
@@ -57,10 +57,35 @@ int main(int argnum, char **args)
 	rotation = Matrix4x4_mul(matrix4x4_set_rotation(-45, (t_point){0.0f,1.0f,0.0f, 0.0f}), rotation);
 	rotation = Matrix4x4_mul(matrix4x4_set_rotation(-35, (t_point){1.0f,0.0f,0.0f, 0.0f}), rotation);
 
-	model = Matrix4x4_mul(matrix4x4_set_translation((t_point){600.0f, 150.0f, -0.0f, 0}), Matrix4x4_mul(rotation, matrix4x4_set_scale((t_point){0.65f, 0.65f, 0.65f, 1.0f})));
 //	t_matrix4f iso = get_isometric_matrix();
 	unsigned int j = 0;
 	unsigned int last_line_index = 0;
+
+	int x_max = 0;
+	int x_min = 0;
+	int y_max = 0;
+	int y_min = 0;
+	i = 0;
+	while(i < size)
+	{
+		t_point p = result[i];
+		p = point_matrix_multiply(rotation, p);
+		p = point_matrix_multiply(pers, p);
+		x_max = get_max(x_max, p.x);
+		y_max = get_max(y_max, p.y);
+		x_min = get_min(x_min, p.x);
+		y_min = get_min(y_min, p.y);
+		i++;
+	}
+
+	float scale_x = (float)(1920 - 300) / (abs(x_max) + abs(x_min));
+	float scale_y = (float)(1080 - 300) / (abs(y_max) + abs(y_min));
+	float scale = (scale_x < scale_y) * scale_x + !(scale_x < scale_y) * scale_y;
+	printf("(x_max + x_min) * scale_x = %d\n", (abs(x_max) + abs(x_min)));
+	printf("(y_max + y_min) * scale_y = %d\n", (abs(y_max) + abs(y_min)));
+	
+	model = Matrix4x4_mul(matrix4x4_set_translation((t_point){ (float)(1920 - ((float)(abs(x_max) + abs(x_min)) / 2) * scale) / 2 + 70, (float)(1080 - ((float)(abs(y_max) + abs(y_min)) / 2) * scale) / 2 - 70, 900.0f, 0}), Matrix4x4_mul(rotation, matrix4x4_set_scale((t_point){scale, scale, scale, 1.0f})));
+	i = 1;
 	while(i < (size))
 	{
 		//printf("%u(x = %f, y = %f, z = %f)\n", i, result[i].x, result[i].y, result[i].z);
@@ -93,7 +118,7 @@ int main(int argnum, char **args)
 				DDA(p.x, p.y, p2.x, p2.y, &img, 0x00990000);
 			else
 			 	DDA(p.x, p.y, p2.x, p2.y, &img, 0x00000099);
-			my_mlx_pixel_put(&img, p2.x, p2.y, 0x00009999);
+			my_mlx_pixel_put(&img, p2.x, p2.y, 0x00009900);
 
 		}
 		if(up)
@@ -106,7 +131,7 @@ int main(int argnum, char **args)
 				DDA(p.x, p.y, p2.x, p2.y, &img, 0x00990000);
 			else
 				DDA(p.x, p.y, p2.x, p2.y, &img, 0x00000099);
-			my_mlx_pixel_put(&img, p2.x, p2.y, 0x00009999);
+			my_mlx_pixel_put(&img, p2.x, p2.y, 0x00009900);
 			j++;
 		}
 		i++;

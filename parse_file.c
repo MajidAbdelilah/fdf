@@ -10,7 +10,7 @@ t_point	get_point(int x, int y, int z)
 
 	result.x = x * XYZ_MUL;
 	result.z = y * XYZ_MUL;
-	result.y = - ((float)z * XYZ_MUL);
+	result.y = -((float)z * XYZ_MUL);
 	result.w = 1.0f;
 	return result;
 }
@@ -46,9 +46,9 @@ void fix_positions(t_point *data, unsigned int size, unsigned int i_i, unsigned 
 	avg = max + min;
 	while(i < size)
 	{
-		data[i].y -= (float)avg / 2;
-		data[i].x -= (float)i_i / 2;
-		data[i].z -= (float)j_j / 2;
+		data[i].y -= (float)(avg) / 2;
+		data[i].x -= (float)(i_i * XYZ_MUL) / 2;
+		data[i].z -= (float)(j_j * XYZ_MUL) / 2;
 		i++;
 	}
 }
@@ -83,7 +83,7 @@ t_point	*get_split_fdf(int fd, unsigned int *size, unsigned int *size_i, unsigne
 		}
 		j++;
 	}
-	fix_positions(result, index, i, j);
+	fix_positions(result, index, i - 1, j - 1);
 	*size_i = i;
 	*size_j = j;
 	(*size) = index;
