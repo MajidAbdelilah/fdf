@@ -57,7 +57,7 @@ int main(int argnum, char **args)
 	rotation = Matrix4x4_mul(matrix4x4_set_rotation(-45, (t_point){0.0f,1.0f,0.0f, 0.0f}), rotation);
 	rotation = Matrix4x4_mul(matrix4x4_set_rotation(-35, (t_point){1.0f,0.0f,0.0f, 0.0f}), rotation);
 
-	model = Matrix4x4_mul(matrix4x4_set_translation((t_point){600.0f, 150.0f, -0.0f, 0}), Matrix4x4_mul(rotation, matrix4x4_set_scale((t_point){0.05f, 0.05f, 0.05f, 1.0f})));
+	model = Matrix4x4_mul(matrix4x4_set_translation((t_point){600.0f, 150.0f, -0.0f, 0}), Matrix4x4_mul(rotation, matrix4x4_set_scale((t_point){0.65f, 0.65f, 0.65f, 1.0f})));
 //	t_matrix4f iso = get_isometric_matrix();
 	unsigned int j = 0;
 	unsigned int last_line_index = 0;
@@ -92,8 +92,8 @@ int main(int argnum, char **args)
 			if(result[i].y < 0.0f || result[i-1].y < 0.0f)
 				DDA(p.x, p.y, p2.x, p2.y, &img, 0x00990000);
 			else
-			 	DDA(p.x, p.y, p2.x, p2.y, &img, 0x00009900);
-			my_mlx_pixel_put(&img, p2.x, p2.y, 0x0000FF00);
+			 	DDA(p.x, p.y, p2.x, p2.y, &img, 0x00000099);
+			my_mlx_pixel_put(&img, p2.x, p2.y, 0x00009999);
 
 		}
 		if(up)
@@ -105,8 +105,8 @@ int main(int argnum, char **args)
 			if(result[i].y < 0.0f || result[i - i_i].y < 0.0f)
 				DDA(p.x, p.y, p2.x, p2.y, &img, 0x00990000);
 			else
-				DDA(p.x, p.y, p2.x, p2.y, &img, 0x00009900);
-			my_mlx_pixel_put(&img, p2.x, p2.y, 0x0000FF00);
+				DDA(p.x, p.y, p2.x, p2.y, &img, 0x00000099);
+			my_mlx_pixel_put(&img, p2.x, p2.y, 0x00009999);
 			j++;
 		}
 		i++;
