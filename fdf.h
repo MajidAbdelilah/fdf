@@ -48,6 +48,29 @@ typedef struct
 	t_point v[4];
 } t_quad;
 
+
+typedef struct {
+	void	*mlx;
+	void	*mlx_win;
+	t_data	img;
+	t_point *result;
+	t_matrix4f model;
+	t_point rotation;
+} t_loop_data;
+typedef struct {
+unsigned int size;
+	unsigned int j_j;
+	unsigned int i_i;
+	unsigned int i;
+	unsigned int i_size;
+	unsigned int j;
+	unsigned int last_line_index;
+	char up;
+	int x_min;
+	int y_min;
+
+} t_main;
+
 t_point	*get_split_fdf(int fd, unsigned int *size, unsigned int *size_i, unsigned int *size_j);
 t_matrix4f perspective(float left,float right,float bottom,float top,float near,float far);
 t_matrix4f orthogonal(float left,float right,float bottom,float top,float near,float far);
