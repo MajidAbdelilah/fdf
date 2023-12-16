@@ -6,8 +6,51 @@
 #include <stdio.h>
 #include "mlx/mlx.h"
 
+typedef struct {
+	void	*mlx;
+	void	*mlx_win;
+	t_data	img;
+	t_point *result;
+} t_loop_data;
 
+int	loop(void *data)
+{
+	//t_loop_data d = *(t_loop_data*)data;
+	(void)data;
 
+	return 0;
+}
+int	close(t_loop_data *vars)
+{
+	mlx_destroy_window(vars->mlx, vars->mlx_win);
+	mlx_destroy_image(vars->mlx, vars->img.img);
+	
+	free(vars->result);
+	free(vars->mlx);
+	//free(vars->img.addr);
+	exit(0);
+	//vars->mlx = 0;
+	//vars->mlx_win = 0;
+	
+	return (0);
+}
+
+int	esc_close(int keycode, t_loop_data *vars)
+{
+	if(keycode != 53)
+		return 0;
+	
+	mlx_destroy_window(vars->mlx, vars->mlx_win);
+	mlx_destroy_image(vars->mlx, vars->img.img);
+	
+	free(vars->result);
+	free(vars->mlx);
+	//free(vars->img.addr);
+	exit(0);
+	//vars->mlx = 0;
+	//vars->mlx_win = 0;
+	return (0);
+}
 
 int main(int argnum, char **args)
 {
@@ -25,16 +68,17 @@ int main(int argnum, char **args)
 		if(result[i].x == 0.0f)
 			printf("\n");
 	}
+	t_loop_data mlx = {0};
+	mlx.result = result;
 
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
+	mlx.mlx = mlx_init();
+	mlx.mlx_win = mlx_new_window(mlx.mlx, 1920, 1080, "FDF");
+	mlx.img.img = mlx_new_image(mlx.mlx, 1920, 1080);
+	mlx.img.addr = mlx_get_data_addr(mlx.img.img, &mlx.img.bits_per_pixel, &mlx.img.line_length,
+								&mlx.img.endian);
+	mlx_hook(mlx.mlx_win, 17, 0L, close, &mlx);
+	mlx_hook(mlx.mlx_win, 2, 1L<<0, esc_close, &mlx);
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	img.img = mlx_new_image(mlx, 1920, 1080);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-								&img.endian);
 	//my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
 	// i = 1;
 	float aspectRatio = (float)1920/1080;
@@ -124,10 +168,10 @@ int main(int argnum, char **args)
 					continue;
 				}
 			if(result[i].y < 0.0f || result[i-1].y < 0.0f)
-				DDA(p.x, p.y, p2.x, p2.y, &img, 0x00990000);
+				DDA(p.x, p.y, p2.x, p2.y, &mlx.img, 0x00990000);
 			else
-			 	DDA(p.x, p.y, p2.x, p2.y, &img, 0x00000099);
-			my_mlx_pixel_put(&img, p2.x, p2.y, 0x00009900);
+			 	DDA(p.x, p.y, p2.x, p2.y, &mlx.img, 0x00000099);
+			my_mlx_pixel_put(&mlx.img, p2.x, p2.y, 0x00009900);
 
 		}
 		if(up)
@@ -142,16 +186,18 @@ int main(int argnum, char **args)
 					continue;
 				}
 			if(result[i].y < 0.0f || result[i - i_i].y < 0.0f)
-				DDA(p.x, p.y, p2.x, p2.y, &img, 0x00990000);
+				DDA(p.x, p.y, p2.x, p2.y, &mlx.img, 0x00990000);
 			else
-				DDA(p.x, p.y, p2.x, p2.y, &img, 0x00000099);
-			my_mlx_pixel_put(&img, p2.x, p2.y, 0x00009900);
+				DDA(p.x, p.y, p2.x, p2.y, &mlx.img, 0x00000099);
+			my_mlx_pixel_put(&mlx.img, p2.x, p2.y, 0x00009900);
 			j++;
 		}
 		i++;
 	}
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img.img, 0, 0);
 	printf("kjbkcbsdkbcksdbcdkjbcskjbcdksjbcksdjbcksb\n");
-	mlx_loop(mlx);
+	mlx_loop_hook(mlx.mlx, loop, 0);
+
+	mlx_loop(mlx.mlx);
 	return 0;
 }
