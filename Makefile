@@ -8,7 +8,7 @@ PRINTF_SRCS = ft_printf/ft_printf.c ft_printf/ft_itoh.c ft_printf/ft_itohi.c ft_
 PRINTF_OBJS = $(PRINTF_SRCS:.c=.o)
 CC = cc
 AR = ar
-C_FLAGS = -Wall -Wextra -Werror# -O3 -g -fsanitize=address
+C_FLAGS = -Wall -Wextra -Werror -Ofast# -O3 -g -fsanitize=address
 LD_FLAGS := -L./libft -lft -L./mlx -lmlx  -framework OpenGL -framework AppKit 
 NAME = fdf
 LD_FLAGS_OBJ = 

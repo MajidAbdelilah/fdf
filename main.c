@@ -2,7 +2,6 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <sys/fcntl.h>
-#include "ft_printf/ft_printf.h"
 #include <stdio.h>
 #include "mlx/mlx.h"
 
@@ -17,7 +16,7 @@ int	loop(void *data)
 {
 	//t_loop_data d = *(t_loop_data*)data;
 	(void)data;
-
+	// exit(0);
 	return 0;
 }
 int	close(t_loop_data *vars)
@@ -63,10 +62,10 @@ int main(int argnum, char **args)
 	unsigned int i = 0;
 	while(i < (size))
 	{
-		printf("%u(x = %f, y = %f, z = %f, w = %f)\n", i, result[i].x, result[i].y, result[i].z, result[i].w);
+		////printf("%u(x = %f, y = %f, z = %f, w = %f)\n", i, result[i].x, result[i].y, result[i].z, result[i].w);
 		i++;
-		if(result[i].x == 0.0f)
-			printf("\n");
+		//if(result[i].x == 0.0f)
+			//printf("\n");
 	}
 	t_loop_data mlx = {0};
 	mlx.result = result;
@@ -129,14 +128,14 @@ int main(int argnum, char **args)
 	float scale_x = (float)(1920 - 400) / (abs(x_max) + abs(x_min));
 	float scale_y = (float)(1080 - 400) / (abs(y_max) + abs(y_min));
 	float scale = (scale_x < scale_y) * scale_x + !(scale_x < scale_y) * scale_y;
-	printf("(x_max + x_min) * scale_x = %d\n", (abs(x_max) + abs(x_min)));
-	printf("(y_max + y_min) * scale_y = %f\n", scale);
+	////printf("(x_max + x_min) * scale_x = %d\n", (abs(x_max) + abs(x_min)));
+	////printf("(y_max + y_min) * scale_y = %f\n", scale);
 	
 	model = Matrix4x4_mul(matrix4x4_set_translation((t_point){ abs(x_min) * scale + 30, (abs(y_min) * scale) + 30, 0.0f, 0}), Matrix4x4_mul(rotation, matrix4x4_set_scale((t_point){scale, scale, scale, 1.0f})));
 	i = 1;
 	while(i < (size))
 	{
-		//printf("%u(x = %f, y = %f, z = %f)\n", i, result[i].x, result[i].y, result[i].z);
+		//////printf("%u(x = %f, y = %f, z = %f)\n", i, result[i].x, result[i].y, result[i].z);
 		t_point p = result[i];
 		p = point_matrix_multiply(model, p);
 		p = point_matrix_multiply(pers, p);
@@ -145,7 +144,7 @@ int main(int argnum, char **args)
 		t_point p2;
 		// p2.x = (p2.x / p2.w) / 2;
 		// p2.y = (p2.y / p2.w) / 2;
-		 printf("kh 0= %u(x = %f, y = %f, z = %f, w = %f)\n", i, p.x, p.y, p.z, p.w);
+		 ////printf("kh 0= %u(x = %f, y = %f, z = %f, w = %f)\n", i, p.x, p.y, p.z, p.w);
 		// p.x *= ((float)1920/2);
 		// p.y *= ((float)1080/2);
 			
@@ -156,12 +155,12 @@ int main(int argnum, char **args)
 			last_line_index = i;
 			j = 0;
 			up = 1;
-			printf("\n");
+			////printf("\n");
 		}else {
 			p2 = result[i-1];
 			p2 = point_matrix_multiply(model, p2);
 			p2 = point_matrix_multiply(pers, p2);
-			 printf("kh 1= %u(x = %f, y = %f, z = %f, w = %f)\n", i, p2.x, p2.y, p2.z, p2.w);
+			 //printf("kh 1= %u(x = %f, y = %f, z = %f, w = %f)\n", i, p2.x, p2.y, p2.z, p2.w);
 			if(p2.x > 1920 || p2.x < 0 || p2.y > 1080 || p2.y < 0 || p.x > 1920 || p.x < 0 || p.y > 1080 || p.y < 0)
 				{
 					i++;
@@ -179,7 +178,7 @@ int main(int argnum, char **args)
 			p2 = result[i - i_i];
 			p2 = point_matrix_multiply(model, p2);
 			p2 = point_matrix_multiply(pers, p2);
-			 printf("kh 2= %u(x = %f, y = %f, z = %f, w = %f)\n", i, p2.x, p2.y, p2.z, p2.w);
+			 //printf("kh 2= %u(x = %f, y = %f, z = %f, w = %f)\n", i, p2.x, p2.y, p2.z, p2.w);
 			if(p2.x > 1920 || p2.x < 0 || p2.y > 1080 || p2.y < 0 || p.x > 1920 || p.x < 0 || p.y > 1080 || p.y < 0)
 				{
 					i++;
@@ -195,7 +194,7 @@ int main(int argnum, char **args)
 		i++;
 	}
 	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img.img, 0, 0);
-	printf("kjbkcbsdkbcksdbcdkjbcskjbcdksjbcksdjbcksb\n");
+	//printf("kjbkcbsdkbcksdbcdkjbcskjbcdksjbcksdjbcksb\n");
 	mlx_loop_hook(mlx.mlx, loop, 0);
 
 	mlx_loop(mlx.mlx);
