@@ -42,6 +42,9 @@ void get_matrix(t_loop_data *mlx, t_main m)
 	rotation = Matrix4x4_mul(matrix4x4_set_rotation(-35, (t_point){1.0f,0.0f,0.0f, 0.0f}), rotation);
 	mlx->model = rotation;
 	float scale = get_scale(*mlx, &m, rotation, pers);
-	mlx->model = Matrix4x4_mul(matrix4x4_set_translation((t_point){ my_abs_int(m.x_min) * scale + 30, (my_abs_int(m.y_min) * scale) + 30, 0.0f, 0}), Matrix4x4_mul(rotation, matrix4x4_set_scale((t_point){scale, scale, scale, 1.0f})));
+	(*mlx).scale = (t_point){scale, scale, scale, scale};
+	(*mlx).rotation = rotation;
+	(*mlx).transition = (t_point){my_abs_int(m.x_min) * scale + 30, (my_abs_int(m.y_min) * scale) + 30, 0.0f, 0};
+	mlx->model = Matrix4x4_mul(matrix4x4_set_translation(mlx->transition), Matrix4x4_mul(rotation, matrix4x4_set_scale((t_point){mlx->scale.x, mlx->scale.y, mlx->scale.z, 1.0f})));
 	mlx->pers = pers;
 }

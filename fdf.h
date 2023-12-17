@@ -55,8 +55,11 @@ typedef struct {
 	t_data	img;
 	t_point *result;
 	t_matrix4f model;
-	t_point rotation;
+	t_matrix4f rotation;
+	t_point scale;
+	t_point transition;
 	t_matrix4f pers;
+
 } t_loop_data;
 typedef struct {
 unsigned int size;
@@ -93,3 +96,8 @@ float get_scale(t_loop_data d, t_main *m, t_matrix4f rotation, t_matrix4f pers);
 void draw(t_loop_data d, t_main m);
 int	esc_close(int keycode, t_loop_data *vars);
 int	close(t_loop_data *vars);
+
+
+int	handle_keys(int keycode, t_loop_data *vars);
+int rotate(t_loop_data *data, char x, char y, char z, char direction);
+void clear_img(t_loop_data *mlx);

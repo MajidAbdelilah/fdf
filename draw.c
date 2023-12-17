@@ -1,6 +1,23 @@
 #include "fdf.h"
+
+void clear_img(t_loop_data *mlx)
+{
+	int i = 0;
+	while(i < 1080)
+	{
+		int j = 0;
+		while(j < 1920)
+		{
+			my_mlx_pixel_put(&mlx->img, j, i, 0x00000000);
+			j++;
+		}
+		i++;
+	}
+}
+
 void draw(t_loop_data d, t_main m)
 {
+	d.model =  Matrix4x4_mul(matrix4x4_set_translation(d.transition), Matrix4x4_mul(d.rotation, matrix4x4_set_scale((t_point){d.scale.x, d.scale.y, d.scale.z, 1.0f})));
 while(m.i < (m.size))
 	{
 		t_point p = d.result[m.i];
