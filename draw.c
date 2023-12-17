@@ -17,6 +17,7 @@ void clear_img(t_loop_data *mlx)
 
 void draw(t_loop_data d, t_main m)
 {
+	m.i = 1;
 	d.model =  Matrix4x4_mul(matrix4x4_set_translation(d.transition), Matrix4x4_mul(d.rotation, matrix4x4_set_scale((t_point){d.scale.x, d.scale.y, d.scale.z, 1.0f})));
 while(m.i < (m.size))
 	{
@@ -34,11 +35,6 @@ while(m.i < (m.size))
 			p2 = d.result[m.i-1];
 			p2 = point_matrix_multiply(d.model, p2);
 			p2 = point_matrix_multiply(d.pers, p2);
-			if(p2.x > 1920 || p2.x < 0 || p2.y > 1080 || p2.y < 0 || p.x > 1920 || p.x < 0 || p.y > 1080 || p.y < 0)
-				{
-					m.i++;
-					continue;
-				}
 			if(d.result[m.i].y < 0.0f || d.result[m.i-1].y < 0.0f)
 				DDA(p.x, p.y, p2.x, p2.y, &d.img, 0x00990000);
 			else
@@ -49,16 +45,10 @@ while(m.i < (m.size))
 			p2 = d.result[m.i - m.i_i];
 			p2 = point_matrix_multiply(d.model, p2);
 			p2 = point_matrix_multiply(d.pers, p2);
-			if(p2.x > 1920 || p2.x < 0 || p2.y > 1080 || p2.y < 0 || p.x > 1920 || p.x < 0 || p.y > 1080 || p.y < 0)
-				{
-					m.i++;
-					continue;
-				}
 			if(d.result[m.i].y < 0.0f || d.result[m.i - m.i_i].y < 0.0f)
 				DDA(p.x, p.y, p2.x, p2.y, &d.img, 0x00990000);
 			else
 				DDA(p.x, p.y, p2.x, p2.y, &d.img, 0x00000099);
-			m.j++;
 		}
 		m.i++;
 	}

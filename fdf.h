@@ -2,6 +2,8 @@
 
 #define Z_DIVE 8
 #define XYZ_MUL 4
+#define W 1920
+#define H 1080
 
 typedef struct 
 {
@@ -59,6 +61,8 @@ typedef struct {
 	t_point scale;
 	t_point transition;
 	t_matrix4f pers;
+	char animate;
+	char anim_dir;
 
 } t_loop_data;
 typedef struct {
@@ -101,3 +105,6 @@ int	close(t_loop_data *vars);
 int	handle_keys(int keycode, t_loop_data *vars);
 int rotate(t_loop_data *data, char x, char y, char z, char direction);
 void clear_img(t_loop_data *mlx);
+int translate(t_loop_data *data, char x, char y, char z, char direction);
+int scale(t_loop_data *data, char x, char y, char z, char direction);
+void animate(t_loop_data *data);

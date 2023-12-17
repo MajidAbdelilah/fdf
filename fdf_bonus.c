@@ -5,21 +5,72 @@
 int rotate(t_loop_data *data, char x, char y, char z, char direction)
 {
 	if(x && direction)
-		data->rotation = Matrix4x4_mul(matrix4x4_set_rotation(1, (t_point){1.0f, 0.0f,  0.0f,  0.0f}), data->rotation);
+		data->rotation = Matrix4x4_mul(matrix4x4_set_rotation(5, (t_point){1.0f, 0.0f,  0.0f,  0.0f}), data->rotation);
 	if(x && !direction)
-		data->rotation = Matrix4x4_mul(matrix4x4_set_rotation(-1, (t_point){1.0f, 0.0f,  0.0f,  0.0f}), data->rotation);
+		data->rotation = Matrix4x4_mul(matrix4x4_set_rotation(-5, (t_point){1.0f, 0.0f,  0.0f,  0.0f}), data->rotation);
 
 	if(y && direction)
-		data->rotation = Matrix4x4_mul(matrix4x4_set_rotation(1, (t_point){0.0f, 1.0f,  0.0f,  0.0f}), data->rotation);
+		data->rotation = Matrix4x4_mul(matrix4x4_set_rotation(5, (t_point){0.0f, 1.0f,  0.0f,  0.0f}), data->rotation);
 	if(y && !direction)
-		data->rotation = Matrix4x4_mul(matrix4x4_set_rotation(-1, (t_point){0.0f, 1.0f,  0.0f,  0.0f}), data->rotation);
+		data->rotation = Matrix4x4_mul(matrix4x4_set_rotation(-5, (t_point){0.0f, 1.0f,  0.0f,  0.0f}), data->rotation);
 
 	if(z && direction)
-		data->rotation = Matrix4x4_mul(matrix4x4_set_rotation(1, (t_point){0.0f, 0.0f,  1.0f,  0.0f}), data->rotation);
+		data->rotation = Matrix4x4_mul(matrix4x4_set_rotation(5, (t_point){0.0f, 0.0f,  1.0f,  0.0f}), data->rotation);
 	if(z && !direction)
-		data->rotation = Matrix4x4_mul(matrix4x4_set_rotation(-1, (t_point){0.0f, 0.0f,  1.0f,  0.0f}), data->rotation);
+		data->rotation = Matrix4x4_mul(matrix4x4_set_rotation(-5, (t_point){0.0f, 0.0f,  1.0f,  0.0f}), data->rotation);
 	return 0;
 }
+
+int translate(t_loop_data *data, char x, char y, char z, char direction)
+{
+	if(x && direction)
+		data->transition.x += 10.0f;
+	if(x && !direction)
+		data->transition.x -= 10.0f;
+	if(y && direction)
+		data->transition.y += 10.0f;
+	if(y && !direction)
+		data->transition.y -= 10.0f;
+
+	if(z && direction)
+		data->transition.z += 10.0f;
+	if(z && !direction)
+		data->transition.z -= 10.0f;
+	return 0;
+}
+
+int scale(t_loop_data *data, char x, char y, char z, char direction)
+{
+	if(x && direction)
+		data->scale.x += data->scale.x / 5;
+	if(x && !direction)
+		data->scale.x -= data->scale.x / 5;
+	
+	if(y && direction)
+		data->scale.y += data->scale.y / 5;
+	if(y && !direction)
+		data->scale.y -= data->scale.y / 5;
+
+	if(z && direction)
+		data->scale.z += data->scale.z / 5;
+	if(z && !direction)
+		data->scale.z -= data->scale.z / 5;
+	if(data->scale.x <= 0.00000000000f || data->scale.y <= 0.00000000000f || data->scale.z <= 0.00000000000f)
+		data->scale = (t_point){0.0f, 0.0f, 0.0f, 1.0f};
+	return 0;
+}
+
+
+void animate(t_loop_data *data)
+{
+	if(data->animate)
+	{
+		rotate(data, 1, 0, 1, data->anim_dir);
+	}
+	
+}
+
+
 typedef struct {
 	t_loop_data *mlx;
 	t_main *m;
@@ -28,7 +79,7 @@ typedef struct {
 int	loop(t_all *data)
 {
 	(void)data;
-	
+	animate(data->mlx);
 	clear_img(data->mlx);
 	draw(*data->mlx, *data->m);
 	mlx_put_image_to_window(data->mlx->mlx, data->mlx->mlx_win, data->mlx->img.img, 0, 0);

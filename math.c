@@ -147,6 +147,12 @@ void DDA(float X0, float Y0, float X1, float Y1, t_data *data, int color)
     float X = X0; 
     float Y = Y0; 
     for (int i = 0; i <= steps; i++) { 
+		if(round(X) > (W - 10) || round(X) < 10 || round(Y) > (H - 10) || round(Y) < 10)
+		{
+			X += Xinc; // increment in x at each step 
+		    Y += Yinc; // increment in y at each step 
+			continue;
+		}
         my_mlx_pixel_put(data, round(X), round(Y), 
                  color); // put pixel at (X,Y) 
         X += Xinc; // increment in x at each step 

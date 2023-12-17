@@ -23,8 +23,8 @@ float get_scale(t_loop_data d, t_main *m, t_matrix4f rotation, t_matrix4f pers)
 		m->i++;
 	}
 
-	float scale_x = (float)(1920 - 400) / (my_abs_int(x_max) + my_abs_int(x_min));
-	float scale_y = (float)(1080 - 400) / (my_abs_int(y_max) + my_abs_int(y_min));
+	float scale_x = (float)(W) / (my_abs_int(x_max) + my_abs_int(x_min));
+	float scale_y = (float)(H) / (my_abs_int(y_max) + my_abs_int(y_min));
 	float scale = (scale_x < scale_y) * scale_x + !(scale_x < scale_y) * scale_y;
 	m->x_min = x_min;
 	m->y_min = y_min;
@@ -44,7 +44,7 @@ void get_matrix(t_loop_data *mlx, t_main m)
 	float scale = get_scale(*mlx, &m, rotation, pers);
 	(*mlx).scale = (t_point){scale, scale, scale, scale};
 	(*mlx).rotation = rotation;
-	(*mlx).transition = (t_point){my_abs_int(m.x_min) * scale + 30, (my_abs_int(m.y_min) * scale) + 30, 0.0f, 0};
+	(*mlx).transition = (t_point){my_abs_int(m.x_min) * scale + 30, (my_abs_int(m.y_min) * scale) / 2 + 30, 0.0f, 0};
 	mlx->model = Matrix4x4_mul(matrix4x4_set_translation(mlx->transition), Matrix4x4_mul(rotation, matrix4x4_set_scale((t_point){mlx->scale.x, mlx->scale.y, mlx->scale.z, 1.0f})));
 	mlx->pers = pers;
 }
