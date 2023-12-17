@@ -56,6 +56,7 @@ typedef struct {
 	t_point *result;
 	t_matrix4f model;
 	t_point rotation;
+	t_matrix4f pers;
 } t_loop_data;
 typedef struct {
 unsigned int size;
@@ -85,3 +86,10 @@ t_matrix4f matrix4x4_set_translation(t_point vecPos);
 t_matrix4f Matrix4x4_mul(t_matrix4f left, t_matrix4f right);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 t_matrix4f get_isometric_matrix();
+
+
+void get_matrix(t_loop_data *mlx, t_main m);
+float get_scale(t_loop_data d, t_main *m, t_matrix4f rotation, t_matrix4f pers);
+void draw(t_loop_data d, t_main m);
+int	esc_close(int keycode, t_loop_data *vars);
+int	close(t_loop_data *vars);
