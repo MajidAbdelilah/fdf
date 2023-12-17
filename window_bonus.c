@@ -7,7 +7,7 @@ int	handle_keys(int keycode, t_loop_data *vars)
 	// if(keycode != 53)
 	// 	return 0;
 	(void)vars;
-
+	printf("keycode = %d\n", keycode);
 	if(keycode == 31)
 		rotate(vars, 1, 0, 0, 0);
 	if(keycode == 37)
@@ -37,6 +37,9 @@ int	handle_keys(int keycode, t_loop_data *vars)
 
 	if(keycode == 7)
 		vars->animate = !vars->animate;
+
+	if(keycode == 6)
+		Multiview_orthographic_projection(vars);
 
 
 

@@ -108,3 +108,4 @@ void clear_img(t_loop_data *mlx);
 int translate(t_loop_data *data, char x, char y, char z, char direction);
 int scale(t_loop_data *data, char x, char y, char z, char direction);
 void animate(t_loop_data *data);
+void Multiview_orthographic_projection(t_loop_data *d);

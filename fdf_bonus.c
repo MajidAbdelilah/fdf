@@ -70,6 +70,16 @@ void animate(t_loop_data *data)
 	
 }
 
+void Multiview_orthographic_projection(t_loop_data *d)
+{
+	static char xyz;
+	xyz++;
+	d->rotation = matrix4x4_set_rotation(180 - 90 * (xyz == 2), (t_point){xyz == 0 , xyz == 1 , xyz == 2, 0.0f});
+	if(xyz > 2)
+		xyz = 0;
+}
+
+
 
 typedef struct {
 	t_loop_data *mlx;
