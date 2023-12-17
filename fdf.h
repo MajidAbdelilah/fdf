@@ -86,7 +86,7 @@ t_matrix4f matrix4x4_set_translation(t_point vecPos);
 t_matrix4f Matrix4x4_mul(t_matrix4f left, t_matrix4f right);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 t_matrix4f get_isometric_matrix();
-
+int my_abs_int(int n);
 
 void get_matrix(t_loop_data *mlx, t_main m);
 float get_scale(t_loop_data d, t_main *m, t_matrix4f rotation, t_matrix4f pers);

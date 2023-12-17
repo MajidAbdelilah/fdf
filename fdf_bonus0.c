@@ -1,6 +1,6 @@
 #include "fdf.h"
 #include <sys/fcntl.h>
-#include "mlx/mlx.h"
+#include "mlx.h"
 
 int rotate(t_loop_data *data, char x, char y, char z, char direction)
 {
@@ -20,12 +20,15 @@ int rotate(t_loop_data *data, char x, char y, char z, char direction)
 		data->rotation.z -= 0.0000001;
 	return 0;
 }
+typedef struct {
+	t_loop_data mlx;
+	t_main m;
+}t_all;
 
-int	loop(void *data)
+int	loop(t_all *data)
 {
 	(void)data;
-	
-
+	draw(data->mlx, data->m);
 	return 0;
 }
 
@@ -53,7 +56,7 @@ int main(int argnum, char **args)
 	m.i = 1;
 	draw(mlx, m);	
 	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img.img, 0, 0);
-	mlx_loop_hook(mlx.mlx, loop, 0);
+	mlx_loop_hook(mlx.mlx, loop, (t_all[]){{mlx, m}});
 	mlx_loop(mlx.mlx);
 	return 0;
 }

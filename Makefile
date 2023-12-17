@@ -1,4 +1,4 @@
-SRCS =	 main.c parse_file.c math.c
+SRCS =	 main.c parse_file.c math.c utils.c window.c draw.c
 OBJS = $(SRCS:.c=.o)
 BONUS_SRCS = 
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)

@@ -111,6 +111,8 @@ t_matrix4f Matrix4x4_mul(t_matrix4f left, t_matrix4f right)
 }
 
 float my_abs(float n) { return ((n > 0.0f) ? n : (n * (-1.0f))); } 
+int my_abs_int(int n) { return ((n > 0) ? n : (n * (-1))); } 
+
 int get_max(int x, int y)
 {
 	char is_x = (x > y);
