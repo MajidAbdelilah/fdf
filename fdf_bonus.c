@@ -102,8 +102,8 @@ void init(t_loop_data *mlx, t_main *m, int map)
 	t_point *result = get_split_fdf(map, &m->size, &m->i_i, &m->j_j);
 	mlx->result = result;
 	mlx->mlx = mlx_init();
-	mlx->mlx_win = mlx_new_window(mlx->mlx, 1920, 1080, "FDF");
-	mlx->img.img = mlx_new_image(mlx->mlx, 1920, 1080);
+	mlx->mlx_win = mlx_new_window(mlx->mlx, W, H, "FDF");
+	mlx->img.img = mlx_new_image(mlx->mlx, W, H);
 	mlx->img.addr = mlx_get_data_addr(mlx->img.img, &mlx->img.bits_per_pixel, &mlx->img.line_length,
 								&mlx->img.endian);
 	mlx_hook(mlx->mlx_win, 17, 0L, close, mlx);

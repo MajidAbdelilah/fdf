@@ -3,10 +3,10 @@
 void clear_img(t_loop_data *mlx)
 {
 	int i = 0;
-	while(i < 1080)
+	while(i < H)
 	{
 		int j = 0;
-		while(j < 1920)
+		while(j < W)
 		{
 			my_mlx_pixel_put(&mlx->img, j, i, 0x00000000);
 			j++;
@@ -29,7 +29,6 @@ while(m.i < (m.size))
 		{
 			m.i_size = m.last_line_index;
 			m.last_line_index = m.i;
-			m.j = 0;
 			m.up = 1;
 		}else {
 			p2 = d.result[m.i-1];

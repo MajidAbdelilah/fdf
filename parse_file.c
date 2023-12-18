@@ -61,7 +61,7 @@ t_point	*get_split_fdf(int fd, unsigned int *size, unsigned int *size_i, unsigne
 	unsigned int	index;
 	t_point *result;
 	
-	r_size = 100000;
+	r_size = 700000;
 	result = malloc(sizeof(t_point) * r_size);
 	j = 0;
 	index = 0;
