@@ -81,6 +81,14 @@ t_point	*get_split_fdf(int fd, unsigned int *size, unsigned int *size_i, unsigne
 			result[index++] = get_point(i, j, ft_atoi(splited_line[i]));
 			i++;
 		}
+		free(line);
+		unsigned int m = 0;
+		while(splited_line[m])
+		{
+			free(splited_line[m]);
+			m++;
+		}
+		free(splited_line);
 		j++;
 	}
 	fix_positions(result, index, i - 1, j - 1);

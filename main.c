@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include "mlx.h"
 
-
+#include <unistd.h>
 
 int	loop(void *data)
 {
@@ -25,12 +25,19 @@ void init(t_loop_data *mlx, t_main *m, int map)
 	mlx->img.img = mlx_new_image(mlx->mlx, W, H);
 	mlx->img.addr = mlx_get_data_addr(mlx->img.img, &mlx->img.bits_per_pixel, &mlx->img.line_length,
 								&mlx->img.endian);
-	mlx_hook(mlx->mlx_win, 17, 0L, close, mlx);
+	mlx_hook(mlx->mlx_win, 17, 0L, mlx_close, mlx);
 	mlx_hook(mlx->mlx_win, 2, 1L<<0, esc_close, mlx);
+	close(map);
+}
+void check()
+{
+	system("leaks fdf");
 }
 
 int main(int argnum, char **args)
 {
+		atexit(check);
+
 	(void)(argnum);
 	int map = open(args[1], O_RDONLY);
 	t_main m = {0};

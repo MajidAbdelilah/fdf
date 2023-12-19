@@ -37,7 +37,7 @@ void get_matrix(t_loop_data *mlx, t_main m)
 	float halfWidth = 1.0f;
 	float halfHeight = halfWidth/aspectRatio;
 	t_matrix4f pers = orthogonal(-halfWidth, halfWidth, -halfHeight, halfHeight, 1.0f, 100.0f);
-	t_matrix4f rotation = IDENTITY_MATRIX;
+	t_matrix4f rotation = get_identity_matrix();
 	rotation = Matrix4x4_mul(matrix4x4_set_rotation(-45, (t_point){0.0f,1.0f,0.0f, 0.0f}), rotation);
 	rotation = Matrix4x4_mul(matrix4x4_set_rotation(-35, (t_point){1.0f,0.0f,0.0f, 0.0f}), rotation);
 	mlx->model = rotation;

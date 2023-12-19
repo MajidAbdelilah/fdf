@@ -1,11 +1,20 @@
 #include "fdf.h"
 #include <math.h>
 
+
+t_matrix4f get_identity_matrix()
+{
+	return ((t_matrix4f){.m[0][0] = 1.0f, .m[1][0] = 0.0f, .m[2][0] = 0.0f, .m[3][0] = 0.0f,
+							.m[0][1] = 0.0f, .m[1][1] = 1.0f, .m[2][1] = 0.0f, .m[3][1] = 0.0f,
+							.m[0][2] = 0.0f, .m[1][2] = 0.0f, .m[2][2] = 1.0f, .m[3][2] = 0.0f,
+							.m[0][3] = 0.0f, .m[1][3] = 0.0f, .m[2][3] = 0.0f, .m[3][3] = 1.0f});
+}
+
 t_matrix4f perspective(float left,float right,float bottom,float top,float near,float far)
 {
 	t_matrix4f matrix;
 
-	matrix = IDENTITY_MATRIX;
+	matrix = get_identity_matrix();
 	matrix.m[0][0] = 2*near/(right - left);
 	matrix.m[1][1] = 2*near/(top - bottom);
 	matrix.m[2][2] = -(far +near)/(far - near);
@@ -18,7 +27,7 @@ t_matrix4f perspective(float left,float right,float bottom,float top,float near,
 }
 t_matrix4f orthogonal(float left,float right,float bottom,float top,float near,float far)
 {
-	t_matrix4f matrix = IDENTITY_MATRIX;
+	t_matrix4f matrix = get_identity_matrix();
 
 
 	matrix.m[0][0] = 2/(right - left);
@@ -45,7 +54,7 @@ t_point point_matrix_multiply (t_matrix4f m, t_point v)
 }
 t_matrix4f matrix4x4_set_scale(t_point vecScale)
 {
-	t_matrix4f result = IDENTITY_MATRIX;
+	t_matrix4f result = get_identity_matrix();
 	result.m[0][0] = vecScale.x;
 	result.m[1][1] = vecScale.y;
 	result.m[2][2] = vecScale.z;
@@ -53,7 +62,7 @@ t_matrix4f matrix4x4_set_scale(t_point vecScale)
 }
 t_matrix4f matrix4x4_set_rotation(float flAngle, t_point v)
 {
-	t_matrix4f result = IDENTITY_MATRIX;
+	t_matrix4f result = get_identity_matrix();
 	// Normalize beforehand
 	v = (t_point){v.x * v.x, v.y * v.y, v.z * v.z, v.w};
 
@@ -87,7 +96,7 @@ t_matrix4f matrix4x4_set_rotation(float flAngle, t_point v)
 
 t_matrix4f matrix4x4_set_translation(t_point vecPos)
 {
-	t_matrix4f result = IDENTITY_MATRIX;
+	t_matrix4f result = get_identity_matrix();
 	result.m[3][0] = vecPos.x;
 	result.m[3][1] = vecPos.y;
 	result.m[3][2] = vecPos.z;
@@ -100,7 +109,7 @@ t_matrix4f Matrix4x4_mul(t_matrix4f left, t_matrix4f right)
 	// [e f g h][E F G H] = [eA+fE+gI+hM ...
 	// [i j k l][I J K L]
 	// [m n o p][M N O P]
-	t_matrix4f result = IDENTITY_MATRIX;
+	t_matrix4f result = get_identity_matrix();
 	for (int i = 0; i < 4; i++)
 	{
 		for (int j = 0; j < 4; j++)
@@ -162,7 +171,7 @@ void DDA(float X0, float Y0, float X1, float Y1, t_data *data, int color)
 
 t_matrix4f get_isometric_matrix()
 {
-	t_matrix4f result = IDENTITY_MATRIX;
+	t_matrix4f result = get_identity_matrix();
 	float xAxis = M_PI * ( (float)1 /  4);
 	result.m[0][0] = cos(xAxis);
 	result.m[0][1] = sin(xAxis); 

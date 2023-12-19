@@ -41,15 +41,15 @@ bonus: libft/libft.a $(OBJS) $(BONUS_OBJS) $(GNL_OBJS) $(PRINTF_OBJS)
 	$(CC) $(C_FLAGS) -o  $@ $(OBJS)  $(BONUS_OBJS) $(GNL_OBJS) $(PRINTF_OBJS) $(LD_FLAGS) 
 
 debug: C_FLAGS+= -g
-debug: LD_FLAGS+= -fsanitize=address
-debug: LD_FLAGS_OBJ+= -fsanitize=address
+# debug: LD_FLAGS+= -fsanitize=address
+# debug: LD_FLAGS_OBJ+= -fsanitize=address
 debug:  libft/libft.a main.o  $(OBJS) $(GNL_OBJS) $(PRINTF_OBJS)
 	$(CC) $(C_FLAGS) -o $@ main.o $(OBJS) $(GNL_OBJS) $(PRINTF_OBJS) $(LD_FLAGS)
 
 
 b_debug: C_FLAGS+= -g
-b_debug: LD_FLAGS+= -fsanitize=address
-b_debug: LD_FLAGS_OBJ+= -fsanitize=address
+# b_debug: LD_FLAGS+= -fsanitize=address
+# b_debug: LD_FLAGS_OBJ+= -fsanitize=address
 b_debug: libft/libft.a $(OBJS) $(BONUS_OBJS) $(GNL_OBJS) $(PRINTF_OBJS)
 	$(CC) $(C_FLAGS) -o  $@ $(OBJS)  $(BONUS_OBJS) $(GNL_OBJS) $(PRINTF_OBJS) $(LD_FLAGS)
 

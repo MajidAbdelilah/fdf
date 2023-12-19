@@ -49,7 +49,7 @@ int	handle_keys(int keycode, t_loop_data *vars)
 	mlx_destroy_image(vars->mlx, vars->img.img);
 	
 	free(vars->result);
-	free(vars->mlx);
+	//free(vars->mlx);
 	//free(vars->img.addr);
 	exit(0);
 	//vars->mlx = 0;

@@ -6,14 +6,16 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:38:40 by amajid            #+#    #+#             */
-/*   Updated: 2023/12/19 18:22:16 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/19 21:04:56 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
 #include <sys/fcntl.h>
 #include "mlx.h"
 #include <stdio.h>
+#include <unistd.h>
 
 int	loop(t_all *data)
 {
@@ -36,8 +38,15 @@ void	init(t_loop_data *mlx, t_main *m, int map)
 	mlx->img.img = mlx_new_image(mlx->mlx, W, H);
 	mlx->img.addr = mlx_get_data_addr(mlx->img.img, &mlx->img.bits_per_pixel,
 			&mlx->img.line_length, &mlx->img.endian);
-	mlx_hook(mlx->mlx_win, 17, 0L, close, mlx);
+	mlx_hook(mlx->mlx_win, 17, 0L, mlx_close, mlx);
 	mlx_hook(mlx->mlx_win, 2, 1L << 0, handle_keys, mlx);
+	close(map);
+}
+
+#include <stdlib.h>
+void check()
+{
+	system("leaks bonus");
 }
 
 int	main(int argnum, char **args)
@@ -46,6 +55,7 @@ int	main(int argnum, char **args)
 	t_main		m;
 	t_loop_data	mlx;
 
+	atexit(check);
 	(void)(argnum);
 	map = open(args[1], O_RDONLY);
 	m = (t_main){0};
