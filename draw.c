@@ -1,12 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/19 17:10:44 by amajid            #+#    #+#             */
+/*   Updated: 2023/12/19 17:37:28 by amajid           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-void clear_img(t_loop_data *mlx)
+void	clear_img(t_loop_data *mlx)
 {
-	int i = 0;
-	while(i < H)
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < H)
 	{
-		int j = 0;
-		while(j < W)
+		j = 0;
+		while (j < W)
 		{
 			my_mlx_pixel_put(&mlx->img, j, i, 0x00000000);
 			j++;
@@ -15,40 +30,43 @@ void clear_img(t_loop_data *mlx)
 	}
 }
 
-void draw(t_loop_data d, t_main m)
+void	draw_line(t_loop_data d, t_main m, t_point p, long long index)
 {
+	t_point	p2;
+
+	p2 = d.result[m.i - index];
+	p2 = point_matrix_multiply(d.model, p2);
+	p2 = point_matrix_multiply(d.pers, p2);
+	if (d.result[m.i].y < 0.0f || d.result[m.i - index].y < 0.0f)
+		DDA(p.x, p.y, p2.x, p2.y, &d.img, 0x00990000);
+	else
+		DDA(p.x, p.y, p2.x, p2.y, &d.img, 0x00000099);
+}
+
+void	draw(t_loop_data d, t_main m)
+{
+	t_point	p;
+
 	m.i = 1;
-	d.model =  Matrix4x4_mul(matrix4x4_set_translation(d.transition), Matrix4x4_mul(d.rotation, matrix4x4_set_scale((t_point){d.scale.x, d.scale.y, d.scale.z, 1.0f})));
-while(m.i < (m.size))
+	d.model = Matrix4x4_mul(matrix4x4_set_translation(d.transition),
+			Matrix4x4_mul(d.rotation,
+				matrix4x4_set_scale(
+					(t_point){d.scale.x, d.scale.y, d.scale.z, 1.0f})));
+	while (m.i < (m.size))
 	{
-		t_point p = d.result[m.i];
+		p = d.result[m.i];
 		p = point_matrix_multiply(d.model, p);
-		p = point_matrix_multiply(d.pers, p);		
-		t_point p2;
-		if((m.i % m.i_i) == 0)
+		p = point_matrix_multiply(d.pers, p);
+		if ((m.i % m.i_i) == 0)
 		{
 			m.i_size = m.last_line_index;
 			m.last_line_index = m.i;
 			m.up = 1;
-		}else {
-			p2 = d.result[m.i-1];
-			p2 = point_matrix_multiply(d.model, p2);
-			p2 = point_matrix_multiply(d.pers, p2);
-			if(d.result[m.i].y < 0.0f || d.result[m.i-1].y < 0.0f)
-				DDA(p.x, p.y, p2.x, p2.y, &d.img, 0x00990000);
-			else
-			 	DDA(p.x, p.y, p2.x, p2.y, &d.img, 0x00000099);
 		}
-		if(m.up)
-		{
-			p2 = d.result[m.i - m.i_i];
-			p2 = point_matrix_multiply(d.model, p2);
-			p2 = point_matrix_multiply(d.pers, p2);
-			if(d.result[m.i].y < 0.0f || d.result[m.i - m.i_i].y < 0.0f)
-				DDA(p.x, p.y, p2.x, p2.y, &d.img, 0x00990000);
-			else
-				DDA(p.x, p.y, p2.x, p2.y, &d.img, 0x00000099);
-		}
+		else
+			draw_line(d, m, p, 1);
+		if (m.up)
+			draw_line(d, m, p, m.i_i);
 		m.i++;
 	}
 }
