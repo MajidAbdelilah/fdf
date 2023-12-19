@@ -9,9 +9,9 @@ typedef struct
 {
 	// RIGHT
 	float	x;
-	// FORWARD
-	float	y;
 	// UP
+	float	y;
+	// FORWARD
 	float	z;
 	float	w;
 }	t_point;
