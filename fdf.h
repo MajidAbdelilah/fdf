@@ -79,6 +79,11 @@ unsigned int size;
 
 } t_main;
 
+typedef struct {
+	t_loop_data	*mlx;
+	t_main	*m;
+}	t_all;
+
 t_point	*get_split_fdf(int fd, unsigned int *size, unsigned int *size_i, unsigned int *size_j);
 t_matrix4f perspective(float left,float right,float bottom,float top,float near,float far);
 t_matrix4f orthogonal(float left,float right,float bottom,float top,float near,float far);
@@ -103,9 +108,9 @@ int	close(t_loop_data *vars);
 
 
 int	handle_keys(int keycode, t_loop_data *vars);
-int rotate(t_loop_data *data, char x, char y, char z, char direction);
+int	rotate(t_loop_data *data, t_point p, char direction);
 void clear_img(t_loop_data *mlx);
-int translate(t_loop_data *data, char x, char y, char z, char direction);
-int scale(t_loop_data *data, char x, char y, char z, char direction);
+int	translate(t_loop_data *data, t_point p, char direction);
+int	scale(t_loop_data *data, t_point p, char direction);
 void animate(t_loop_data *data);
-void Multiview_orthographic_projection(t_loop_data *d);
+void	multiview_orthographic_projection(t_loop_data *d);

@@ -1,6 +1,6 @@
 SRCS =	  parse_file.c math.c utils.c window.c draw.c
 OBJS = $(SRCS:.c=.o)
-BONUS_SRCS = fdf_bonus.c window_bonus.c
+BONUS_SRCS = fdf_bonus.c window_bonus.c utils_bonus.c
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 GNL_SRCS = gnl/get_next_line.c gnl/get_next_line_utils.c
 GNL_OBJS = $(GNL_SRCS:.c=.o)
