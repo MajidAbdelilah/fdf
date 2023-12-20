@@ -6,14 +6,14 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:38:40 by amajid            #+#    #+#             */
-/*   Updated: 2023/12/19 21:04:56 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/20 20:12:04 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 #include <sys/fcntl.h>
-#include "mlx.h"
+#include "/usr/local/include/mlx.h"
 #include <stdio.h>
 #include <unistd.h>
 

@@ -1,5 +1,5 @@
 #include "fdf.h"
-#include "mlx.h"
+#include "/usr/local/include/mlx.h"
 #include <stdlib.h>
 int	mlx_close(t_loop_data *vars)
 {

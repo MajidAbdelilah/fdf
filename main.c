@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:10:39 by amajid            #+#    #+#             */
-/*   Updated: 2023/12/20 17:15:48 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/20 20:11:01 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <sys/fcntl.h>
 #include <stdio.h>
-#include "mlx.h"
+#include "/usr/local/include/mlx.h"
 #include <unistd.h>
 
 int	loop(void *data)

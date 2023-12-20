@@ -1,6 +1,6 @@
 #include "fdf.h"
 #include <stdio.h>
-#include "mlx.h"
+#include "/usr/local/include/mlx.h"
 #include <stdlib.h>
 int	handle_keys(int keycode, t_loop_data *vars)
 {
