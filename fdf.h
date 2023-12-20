@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 19:59:37 by amajid            #+#    #+#             */
-/*   Updated: 2023/12/20 17:09:56 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/20 19:58:43 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,17 @@ t_point		*get_split_fdf(int fd, unsigned int *size,
 				unsigned int *size_i, unsigned int *size_j);
 t_matrix4f	perspective(float left, float right, float bottom,
 				float top, float near, float far);
-t_matrix4f	orthogonal(float left, float right, float bottom,
-				float top, float near, float far);
+t_matrix4f	orthogonal(t_point m, float near, float far);
 t_point		point_matrix_multiply(t_matrix4f m, t_point v);
 t_point		get_normalized_ray(t_point p1, t_point p2);
-void		DDA(float X0, float Y0, float X1,
-				float Y1, t_data *data, int color);
+void		dda(t_point p, t_data *data, int color);
 int			get_max(int x, int y);
 int			get_min(int x, int y);
+float		my_abs(float n);
 t_matrix4f	matrix4x4_set_scale(t_point vecScale);
 t_matrix4f	matrix4x4_set_rotation(float flAngle, t_point v);
 t_matrix4f	matrix4x4_set_translation(t_point vecPos);
-t_matrix4f	Matrix4x4_mul(t_matrix4f left, t_matrix4f right);
+t_matrix4f	matrix4x4_mul(t_matrix4f left, t_matrix4f right);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 t_matrix4f	get_isometric_matrix(void);
 int			my_abs_int(int n);

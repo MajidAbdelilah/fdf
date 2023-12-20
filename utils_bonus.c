@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 18:15:02 by amajid            #+#    #+#             */
-/*   Updated: 2023/12/19 18:16:19 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/20 19:43:58 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 int	rotate(t_loop_data *data, t_point p, char direction)
 {
 	if (p.x && direction)
-		data->rotation = Matrix4x4_mul(matrix4x4_set_rotation(5,
+		data->rotation = matrix4x4_mul(matrix4x4_set_rotation(5,
 					(t_point){1.0f, 0.0f, 0.0f, 0.0f}), data->rotation);
 	if (p.x && !direction)
-		data->rotation = Matrix4x4_mul(matrix4x4_set_rotation(-5,
+		data->rotation = matrix4x4_mul(matrix4x4_set_rotation(-5,
 					(t_point){1.0f, 0.0f, 0.0f, 0.0f}), data->rotation);
 	if (p.y && direction)
-		data->rotation = Matrix4x4_mul(matrix4x4_set_rotation(5,
+		data->rotation = matrix4x4_mul(matrix4x4_set_rotation(5,
 					(t_point){0.0f, 1.0f, 0.0f, 0.0f}), data->rotation);
 	if (p.y && !direction)
-		data->rotation = Matrix4x4_mul(matrix4x4_set_rotation(-5,
+		data->rotation = matrix4x4_mul(matrix4x4_set_rotation(-5,
 					(t_point){0.0f, 1.0f, 0.0f, 0.0f}), data->rotation);
 	if (p.z && direction)
-		data->rotation = Matrix4x4_mul(matrix4x4_set_rotation(5,
+		data->rotation = matrix4x4_mul(matrix4x4_set_rotation(5,
 					(t_point){0.0f, 0.0f, 1.0f, 0.0f}), data->rotation);
 	if (p.z && !direction)
-		data->rotation = Matrix4x4_mul(matrix4x4_set_rotation(-5,
+		data->rotation = matrix4x4_mul(matrix4x4_set_rotation(-5,
 					(t_point){0.0f, 0.0f, 1.0f, 0.0f}), data->rotation);
 	return (0);
 }

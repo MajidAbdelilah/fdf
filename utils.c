@@ -36,15 +36,15 @@ void get_matrix(t_loop_data *mlx, t_main m)
 	float aspectRatio = (float)W/H;
 	float halfWidth = 1.0f;
 	float halfHeight = halfWidth/aspectRatio;
-	t_matrix4f pers = orthogonal(-halfWidth, halfWidth, -halfHeight, halfHeight, 1.0f, 100.0f);
+	t_matrix4f pers = orthogonal((t_point){-halfWidth, halfWidth, -halfHeight, halfHeight}, 1.0f, 100.0f);
 	t_matrix4f rotation = get_identity_matrix();
-	rotation = Matrix4x4_mul(matrix4x4_set_rotation(-45, (t_point){0.0f,1.0f,0.0f, 0.0f}), rotation);
-	rotation = Matrix4x4_mul(matrix4x4_set_rotation(-35, (t_point){1.0f,0.0f,0.0f, 0.0f}), rotation);
+	rotation = matrix4x4_mul(matrix4x4_set_rotation(-45, (t_point){0.0f,1.0f,0.0f, 0.0f}), rotation);
+	rotation = matrix4x4_mul(matrix4x4_set_rotation(-35, (t_point){1.0f,0.0f,0.0f, 0.0f}), rotation);
 	mlx->model = rotation;
 	float scale = get_scale(*mlx, &m, rotation, pers);
 	(*mlx).scale = (t_point){scale, scale, scale, scale};
 	(*mlx).rotation = rotation;
 	(*mlx).transition = (t_point){my_abs_int(m.x_min) * scale + 45, (my_abs_int(m.y_min) * scale) / 2 + 45, 0.0f, 0};
-	mlx->model = Matrix4x4_mul(matrix4x4_set_translation(mlx->transition), Matrix4x4_mul(rotation, matrix4x4_set_scale((t_point){mlx->scale.x, mlx->scale.y, mlx->scale.z, 1.0f})));
+	mlx->model = matrix4x4_mul(matrix4x4_set_translation(mlx->transition), matrix4x4_mul(rotation, matrix4x4_set_scale((t_point){mlx->scale.x, mlx->scale.y, mlx->scale.z, 1.0f})));
 	mlx->pers = pers;
 }
