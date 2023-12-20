@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 19:59:37 by amajid            #+#    #+#             */
-/*   Updated: 2023/12/19 20:40:23 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/20 17:09:56 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct s_data
 	int		line_length;
 	int		endian;
 }	t_data;
-
 
 typedef struct s_loop_data
 {
@@ -98,7 +97,7 @@ float		get_scale(t_loop_data d, t_main *m,
 				t_matrix4f rotation, t_matrix4f pers);
 void		draw(t_loop_data d, t_main m);
 int			esc_close(int keycode, t_loop_data *vars);
-int	mlx_close(t_loop_data *vars);
+int			mlx_close(t_loop_data *vars);
 int			handle_keys(int keycode, t_loop_data *vars);
 int			rotate(t_loop_data *data, t_point p, char direction);
 void		clear_img(t_loop_data *mlx);
@@ -106,4 +105,4 @@ int			translate(t_loop_data *data, t_point p, char direction);
 int			scale(t_loop_data *data, t_point p, char direction);
 void		animate(t_loop_data *data);
 void		multiview_orthographic_projection(t_loop_data *d);
-t_matrix4f get_identity_matrix();
+t_matrix4f	get_identity_matrix(void);
