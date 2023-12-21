@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:10:44 by amajid            #+#    #+#             */
-/*   Updated: 2023/12/21 17:57:12 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/21 18:07:47 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void	dda(t_point p, t_data *data, int color)
 	{
 		if (p.x > (W - 10) || p.x < 10 || p.y > (H - 10) || p.y < 10)
 		{
-			if(p.z > (W - 10) || p.z < 10 || p.w > (H - 10) || p.w < 10)
-				return ;
 			p.x += dda.z;
 			p.y += dda.w;
 			continue ;
