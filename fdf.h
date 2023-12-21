@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 19:59:37 by amajid            #+#    #+#             */
-/*   Updated: 2023/12/21 16:48:04 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/21 18:59:36 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_fix_position
 	int				min;
 	int				avg;
 	unsigned int	i;
-} t_fix_position;
+}	t_fix_position;
 
 typedef struct s_point
 {
@@ -39,9 +39,9 @@ typedef struct s_pars
 	unsigned int	i;
 	unsigned int	j;
 	unsigned int	index;
-	unsigned int m;
-	t_point *result;	
-} t_pars;
+	unsigned int	m;
+	t_point			*result;	
+}	t_pars;
 
 typedef struct s_matrix4f
 {
@@ -93,8 +93,6 @@ typedef struct s_all
 
 t_point		*get_split_fdf(int fd, unsigned int *size,
 				unsigned int *size_i, unsigned int *size_j);
-t_matrix4f	perspective(float left, float right, float bottom,
-				float top, float near, float far);
 t_matrix4f	orthogonal(t_point m, float near, float far);
 t_point		point_matrix_multiply(t_matrix4f m, t_point v);
 t_point		get_normalized_ray(t_point p1, t_point p2);

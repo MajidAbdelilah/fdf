@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:24:47 by amajid            #+#    #+#             */
-/*   Updated: 2023/12/21 18:44:09 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/21 18:54:49 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ t_point	*get_split_fdf(int fd, unsigned int *size,
 		splited_line = work0(fd, &var);
 		if (!splited_line)
 			break ;
+		var.m = 0;
 		while (splited_line[var.m])
 		{
 			free(splited_line[var.m]);

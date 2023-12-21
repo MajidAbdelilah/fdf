@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 19:40:28 by amajid            #+#    #+#             */
-/*   Updated: 2023/11/07 15:07:43 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/21 18:50:16 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 			del(content);
 			return (NULL);
 		}
-		ft_lstadd_back(&head, elm); 
+		ft_lstadd_back(&head, elm);
 		lst = lst->next;
 	}
 	return (head);

@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 17:38:14 by amajid            #+#    #+#             */
-/*   Updated: 2023/12/05 19:56:10 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/21 18:47:36 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
+typedef struct s_double_size
+{
+	size_t	i;
+	size_t	count;
+}	t_double_size;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);

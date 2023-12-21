@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:54:55 by amajid            #+#    #+#             */
-/*   Updated: 2023/12/06 17:29:30 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/21 18:50:49 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 #  define BUFFER_SIZE 512
 # endif
 
-typedef struct vars{
+typedef struct vars
+{
 	char	*buffer;
 	char	*buffer_swap;
 	char	*ret_buf;

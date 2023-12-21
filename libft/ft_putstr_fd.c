@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:16:03 by amajid            #+#    #+#             */
-/*   Updated: 2023/12/05 19:48:49 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/21 18:48:28 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_putstr_fd(char *s, int fd)
 	size_t	size;
 
 	if (!s)
-		return 0;
+		return (0);
 	size = ft_strlen(s);
-	return write(fd, s, size);
+	return (write(fd, s, size));
 }

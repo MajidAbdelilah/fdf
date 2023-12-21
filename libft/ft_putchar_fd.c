@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:08:13 by amajid            #+#    #+#             */
-/*   Updated: 2023/12/05 19:51:31 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/21 18:49:46 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 
 int	ft_putchar_fd(char c, int fd)
 {
-	return write(fd, &c, 1);
+	return (write(fd, &c, 1));
 }

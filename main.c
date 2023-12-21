@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:10:39 by amajid            #+#    #+#             */
-/*   Updated: 2023/12/21 16:41:08 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/21 18:57:35 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init(t_loop_data *mlx, t_main *m, int map)
 	t_point	*result;
 
 	result = get_split_fdf(map, &m->size, &m->i_i, &m->j_j);
-	if(!result)
+	if (!result)
 		exit(0);
 	mlx->result = result;
 	mlx->mlx = mlx_init();
@@ -41,12 +41,6 @@ void	init(t_loop_data *mlx, t_main *m, int map)
 	mlx_hook(mlx->mlx_win, 2, 1L << 0, esc_close, mlx);
 	close(map);
 }
-
-// void check()
-// {
-// 	system("leaks fdf");
-// }
-// atexit(check);
 
 int	main(int argnum, char **args)
 {
