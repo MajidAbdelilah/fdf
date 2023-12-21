@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:10:39 by amajid            #+#    #+#             */
-/*   Updated: 2023/12/20 20:11:01 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/21 16:41:08 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	init(t_loop_data *mlx, t_main *m, int map)
 	t_point	*result;
 
 	result = get_split_fdf(map, &m->size, &m->i_i, &m->j_j);
+	if(!result)
+		exit(0);
 	mlx->result = result;
 	mlx->mlx = mlx_init();
 	mlx->mlx_win = mlx_new_window(mlx->mlx, W, H, "FDF");

@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 19:59:37 by amajid            #+#    #+#             */
-/*   Updated: 2023/12/20 19:58:43 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/21 16:48:04 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@
 #define W 1920
 #define H 1080
 
+typedef struct s_fix_position
+{
+	int				max;
+	int				min;
+	int				avg;
+	unsigned int	i;
+} t_fix_position;
+
 typedef struct s_point
 {
 	float	x;
@@ -24,6 +32,16 @@ typedef struct s_point
 	float	z;
 	float	w;
 }	t_point;
+
+typedef struct s_pars
+{
+	unsigned int	r_size;
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	index;
+	unsigned int m;
+	t_point *result;	
+} t_pars;
 
 typedef struct s_matrix4f
 {

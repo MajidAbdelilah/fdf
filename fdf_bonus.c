@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:38:40 by amajid            #+#    #+#             */
-/*   Updated: 2023/12/20 20:12:04 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/21 16:44:55 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "/usr/local/include/mlx.h"
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 int	loop(t_all *data)
 {
@@ -32,6 +33,8 @@ void	init(t_loop_data *mlx, t_main *m, int map)
 	t_point	*result;
 
 	result = get_split_fdf(map, &m->size, &m->i_i, &m->j_j);
+	if(!result)
+		exit(0);
 	mlx->result = result;
 	mlx->mlx = mlx_init();
 	mlx->mlx_win = mlx_new_window(mlx->mlx, W, H, "FDF");
