@@ -1,34 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/21 16:52:42 by amajid            #+#    #+#             */
+/*   Updated: 2023/12/21 17:51:52 by amajid           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 #include <math.h>
+
 float get_scale(t_loop_data d, t_main *m, t_matrix4f rotation, t_matrix4f pers)
 {
-	m->i = 0;
-	t_point p = d.result[0];
-	p = point_matrix_multiply(rotation, p);
-	p = point_matrix_multiply(pers, p);
-	int x_max = p.x;
-	int x_min = p.x;
-	int y_max = p.y;
-	int y_min = p.y;
+	t_point	p;
+	t_point	xy;
+	t_point scale;
+	
+	p = d.result[0];
+	p = point_matrix_multiply(pers, point_matrix_multiply(rotation, p));
+	xy = (t_point){p.x, p.x, p.y, p.y};
 	m->i = 0;
 	while(m->i < m->size)
 	{
 		t_point p = d.result[m->i];
-		p = point_matrix_multiply(rotation, p);
-		p = point_matrix_multiply(pers, p);
-		x_max = get_max(x_max, p.x);
-		y_max = get_max(y_max, p.y);
-		x_min = get_min(x_min, p.x);
-		y_min = get_min(y_min, p.y);
+		p = point_matrix_multiply(pers, point_matrix_multiply(rotation, p));
+		xy = (t_point){.x = get_max(xy.x, p.x), .z = get_max(xy.z, p.y),
+				.y = get_min(xy.y, p.x), .w = get_min(xy.w, p.y)};
 		m->i++;
 	}
-
-	float scale_x = (float)(W - 50) / (my_abs_int(x_max) + my_abs_int(x_min));
-	float scale_y = (float)(H - 50) / (my_abs_int(y_max) + my_abs_int(y_min));
-	float scale = (scale_x < scale_y) * scale_x + !(scale_x < scale_y) * scale_y;
-	m->x_min = x_min;
-	m->y_min = y_min;
-	return scale;
+	scale.x = (float)(W - 50) / (my_abs_int(xy.x) + my_abs_int(xy.y));
+	scale.y = (float)(H - 50) / (my_abs_int(xy.z) + my_abs_int(xy.w));
+	scale.z = (scale.x < scale.y) * scale.x + !(scale.x < scale.y) * scale.y;
+	m->x_min = xy.y;
+	m->y_min = xy.w;
+	return scale.z;
 }
 
 void get_matrix(t_loop_data *mlx, t_main m)
