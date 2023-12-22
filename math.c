@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:45:53 by amajid            #+#    #+#             */
-/*   Updated: 2023/12/20 20:04:05 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/22 22:20:31 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,28 +73,60 @@ t_matrix4f	matrix4x4_set_scale(t_point vecScale)
 // [ yxt+zs  yyt+c   yzt-xs ]
 // [ zxt-ys  zyt+xs  zzt+c  ]
 
-t_matrix4f	matrix4x4_set_rotation(float flAngle, t_point v)
+t_matrix4f	matrix4x4_set_rotation_x(float flAngle)
 {
 	t_matrix4f	result;
-	float		c;
-	float		s;
-	float		t;
-
+	
 	result = get_identity_matrix();
-	v.x *= v.x;
-	v.y *= v.y;
-	v.z *= v.z;
-	c = cos(flAngle * M_PI / 180);
-	s = sin(flAngle * M_PI / 180);
-	t = 1 - c;
-	result.m[0][0] = v.x * v.x * t + c;
-	result.m[1][0] = v.x * v.y * t - v.z * s;
-	result.m[2][0] = v.x * v.z * t + v.y * s;
-	result.m[0][1] = v.y * v.x * t + v.z * s;
-	result.m[1][1] = v.y * v.y * t + c;
-	result.m[2][1] = v.y * v.z * t - v.x * s;
-	result.m[0][2] = v.z * v.x * t - v.y * s;
-	result.m[1][2] = v.z * v.y * t + v.x * s;
-	result.m[2][2] = v.z * v.z * t + c;
+	flAngle = (flAngle * M_PI / 180);
+	result.m[1][1] = cos(flAngle);
+	result.m[2][1] = -sin(flAngle);
+	result.m[1][2] = sin(flAngle);
+	result.m[2][2] = cos(flAngle);
 	return (result);
 }
+
+t_matrix4f	matrix4x4_set_rotation_y(float flAngle)
+{
+	t_matrix4f	result;
+	
+	result = get_identity_matrix();
+	flAngle = (flAngle * M_PI / 180);
+	result.m[0][0] = cos(flAngle);
+	result.m[2][0] = sin(flAngle);
+	result.m[0][2] = -sin(flAngle);
+	result.m[2][2] = cos(flAngle);
+	return (result);
+}
+
+t_matrix4f	matrix4x4_set_rotation_z(float flAngle)
+{
+	t_matrix4f	result;
+	
+	result = get_identity_matrix();
+	flAngle = (flAngle * M_PI / 180);
+	result.m[0][0] = cos(flAngle);
+	result.m[1][0] = -sin(flAngle);
+	result.m[0][1] = sin(flAngle);
+	result.m[1][1] = cos(flAngle);
+	return (result);
+}
+
+
+t_point	matrix4x4_set_rotation(float flAngle, t_point axis, t_point v)
+{
+	t_point result;
+
+	result = v;
+	if(axis.x == 1.0f)
+		result = point_matrix_multiply(matrix4x4_set_rotation_x(flAngle), result);
+	if(axis.y == 1.0f)
+		result = point_matrix_multiply(matrix4x4_set_rotation_y(flAngle), result);
+	if(axis.z == 1.0f)
+		result = point_matrix_multiply(matrix4x4_set_rotation_z(flAngle), result);
+	return result;
+}
+
+
+
+

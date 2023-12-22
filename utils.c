@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:52:42 by amajid            #+#    #+#             */
-/*   Updated: 2023/12/21 18:23:49 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/22 22:23:23 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,8 @@ void	get_matrix(t_loop_data *mlx, t_main m)
 	mlx->pers = orthogonal((t_point){-t.y,
 			t.y, -t.z, t.z}, 1.0f, 100.0f);
 	rotation = get_identity_matrix();
-	rotation = matrix4x4_mul(matrix4x4_set_rotation(-45,
-				(t_point){0.0f, 1.0f, 0.0f, 0.0f}), rotation);
-	rotation = matrix4x4_mul(matrix4x4_set_rotation(-35,
-				(t_point){1.0f, 0.0f, 0.0f, 0.0f}), rotation);
+	rotation = matrix4x4_mul(matrix4x4_set_rotation_y(-45), rotation);
+	rotation = matrix4x4_mul(matrix4x4_set_rotation_x(-35), rotation);
 	mlx->model = rotation;
 	t.w = get_scale(*mlx, &m, rotation, mlx->pers);
 	(*mlx).scale = (t_point){t.w, t.w, t.w, t.w};

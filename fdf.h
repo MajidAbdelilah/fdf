@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 19:59:37 by amajid            #+#    #+#             */
-/*   Updated: 2023/12/21 18:59:36 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/22 22:22:33 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int			get_max(int x, int y);
 int			get_min(int x, int y);
 float		my_abs(float n);
 t_matrix4f	matrix4x4_set_scale(t_point vecScale);
-t_matrix4f	matrix4x4_set_rotation(float flAngle, t_point v);
+t_point		matrix4x4_set_rotation(float flAngle, t_point axis, t_point v);
 t_matrix4f	matrix4x4_set_translation(t_point vecPos);
 t_matrix4f	matrix4x4_mul(t_matrix4f left, t_matrix4f right);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
@@ -121,3 +121,6 @@ int			scale(t_loop_data *data, t_point p, char direction);
 void		animate(t_loop_data *data);
 void		multiview_orthographic_projection(t_loop_data *d);
 t_matrix4f	get_identity_matrix(void);
+t_matrix4f	matrix4x4_set_rotation_x(float flAngle);
+t_matrix4f	matrix4x4_set_rotation_y(float flAngle);
+t_matrix4f	matrix4x4_set_rotation_z(float flAngle);
