@@ -6,7 +6,7 @@
 /*   By: amajid <amajid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 18:15:02 by amajid            #+#    #+#             */
-/*   Updated: 2023/12/22 22:38:01 by amajid           ###   ########.fr       */
+/*   Updated: 2023/12/22 23:21:27 by amajid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,23 @@
 int	rotate(t_loop_data *data, t_point p, char direction)
 {
 	if (p.x && direction)
-		data->rotation = matrix4x4_mul(matrix4x4_set_rotation_x(5), data->rotation);
+		data->rotation = matrix4x4_mul(
+				matrix4x4_set_rotation_x(5), data->rotation);
 	if (p.x && !direction)
-		data->rotation = matrix4x4_mul(matrix4x4_set_rotation_x(-5), data->rotation);
+		data->rotation = matrix4x4_mul(
+				matrix4x4_set_rotation_x(-5), data->rotation);
 	if (p.y && direction)
-		data->rotation = matrix4x4_mul(matrix4x4_set_rotation_y(5), data->rotation);
+		data->rotation = matrix4x4_mul(
+				matrix4x4_set_rotation_y(5), data->rotation);
 	if (p.y && !direction)
-		data->rotation = matrix4x4_mul(matrix4x4_set_rotation_y(-5), data->rotation);
+		data->rotation = matrix4x4_mul(
+				matrix4x4_set_rotation_y(-5), data->rotation);
 	if (p.z && direction)
-		data->rotation = matrix4x4_mul(matrix4x4_set_rotation_z(5), data->rotation);
+		data->rotation = matrix4x4_mul(
+				matrix4x4_set_rotation_z(5), data->rotation);
 	if (p.z && !direction)
-		data->rotation = matrix4x4_mul(matrix4x4_set_rotation_z(-5), data->rotation);
+		data->rotation = matrix4x4_mul(
+				matrix4x4_set_rotation_z(-5), data->rotation);
 	return (0);
 }
 
@@ -78,12 +84,12 @@ void	multiview_orthographic_projection(t_loop_data *d)
 	static char	xyz;
 
 	xyz++;
-	if(xyz == 0)
+	if (xyz == 0)
 		d->rotation = matrix4x4_set_rotation_x(90);
-	if(xyz == 1)
-		d->rotation = matrix4x4_set_rotation_y(90 );
-	if(xyz == 2)
-		d->rotation = matrix4x4_set_rotation_z( 180);
+	if (xyz == 1)
+		d->rotation = matrix4x4_set_rotation_y(90);
+	if (xyz == 2)
+		d->rotation = matrix4x4_set_rotation_z(180);
 	if (xyz >= 2)
 		xyz = -1;
 }
