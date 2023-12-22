@@ -4,7 +4,7 @@ BONUS_SRCS := ft_lstnew.c	ft_lstadd_front.c	ft_lstsize.c	ft_lstlast.c	ft_lstadd_
 BONUS_OBJS := $(BONUS_SRCS:.c=.o)
 CC = cc
 AR = ar
-C_FLAGS = -Wall -Wextra -Werror -Ofast# -O3 -g -fsanitize=address
+C_FLAGS = -Wall -Wextra -Werror # -O3 -g -fsanitize=address
 LD_FLAGS := -lm 
 NAME = libft.a
 .PHONY: all clean fclean re
