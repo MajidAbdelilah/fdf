@@ -21,7 +21,7 @@ fclean: clean
 re: fclean all
 
 
-%.o: %.c
+%.o: %.c libft.h
 	$(CC) $(C_FLAGS) -c -o $@ $<
 
 $(NAME): $(OBJS)
